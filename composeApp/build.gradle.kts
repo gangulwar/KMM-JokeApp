@@ -111,6 +111,7 @@ android {
 }
 dependencies {
     implementation(libs.androidx.ui.tooling.preview.android)
+    implementation(libs.firebase.crashlytics.buildtools)
 }
 
 compose.desktop {
