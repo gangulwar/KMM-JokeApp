@@ -1,5 +1,8 @@
 package model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Flags(
     val nsfw: Boolean,
     val religious: Boolean,

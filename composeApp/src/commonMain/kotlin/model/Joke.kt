@@ -1,13 +1,22 @@
 package model
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import model.Flags
+
+@Serializable
 data class Joke(
     val category: String,
     val type: String,
-    val setup: String?,
-    val delivery: String?,
-    val joke: String?,
+    @SerialName("joke") val content: String?,
+    val setup: String? = null,
+    val delivery: String? = null,
     val flags: Flags,
-    val safe: Boolean,
     val id: Int,
+    val safe: Boolean,
     val lang: String
-)
+) {
+    fun isTwoPart(): Boolean {
+        return type == "twopart"
+    }
+}

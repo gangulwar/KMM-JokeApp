@@ -13,7 +13,7 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = "11"
             }
         }
     }
@@ -61,8 +61,16 @@ kotlin {
 
             implementation("dev.icerock.moko:mvvm-core:0.16.1")
 
+
+
+
         }
+
         desktopMain.dependencies {
+            implementation("io.ktor:ktor-client-cio:$ktorVersion")
+            implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.6")
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.3.6")
+            implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.6")
             implementation(compose.desktop.currentOs)
         }
 
@@ -74,6 +82,9 @@ kotlin {
             implementation("io.ktor:ktor-client-darwin:$ktorVersion")
         }
     }
+
+    task("testClasses")
+
 }
 
 android {

@@ -13,23 +13,38 @@ import org.jetbrains.compose.resources.painterResource
 
 import jokeapp.composeapp.generated.resources.Res
 import jokeapp.composeapp.generated.resources.compose_multiplatform
+import viewmodel.JokeViewModel
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun App() {
     MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-            }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
-                }
+        AppContent(jokeViewModel = JokeViewModel())
+    }
+}
+
+
+@OptIn(ExperimentalResourceApi::class)
+@Composable
+fun AppContent(jokeViewModel: JokeViewModel) {
+
+    var jokeList = jokeViewModel.jokes.collectAsState()
+
+    var showContent by remember { mutableStateOf(false) }
+    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Button(onClick = { showContent = !showContent }) {
+            Text("Click me!")
+        }
+        AnimatedVisibility(showContent) {
+            val greeting = remember { Greeting().greet() }
+            Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                Image(painterResource(Res.drawable.compose_multiplatform), null)
+                Text("Compose: $greeting")
             }
         }
+
+        Text(
+            text = jokeList.value.firstOrNull()?.toString() ?: ""
+        )
     }
 }
