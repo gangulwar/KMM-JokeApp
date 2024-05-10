@@ -10,14 +10,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import jokeapp.composeapp.generated.resources.Res
 import jokeapp.composeapp.generated.resources.compose_multiplatform
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-@Preview
 fun App() {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
