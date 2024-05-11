@@ -8,11 +8,16 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.painterResource
-
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import jokeapp.composeapp.generated.resources.Res
 import jokeapp.composeapp.generated.resources.compose_multiplatform
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.Resource
+import org.jetbrains.compose.resources.painterResource
+import utils.robotoFontFamily
+
 import viewmodel.JokeViewModel
 
 @OptIn(ExperimentalResourceApi::class)
@@ -39,7 +44,13 @@ fun AppContent(jokeViewModel: JokeViewModel) {
             val greeting = remember { Greeting().greet() }
             Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
                 Image(painterResource(Res.drawable.compose_multiplatform), null)
-                Text("Compose: $greeting")
+                Text("Compose: $greeting"
+                , style = TextStyle(
+                    fontFamily = robotoFontFamily,
+                    fontSize = 25.sp,
+                    fontWeight = FontWeight.Medium
+                )
+                )
             }
         }
 
