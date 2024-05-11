@@ -15,8 +15,4 @@ data class Joke(
     val id: Int,
     val safe: Boolean,
     val lang: String
-) {
-    fun isTwoPart(): Boolean {
-        return type == "twopart"
-    }
-}
+)
