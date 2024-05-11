@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,6 +22,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -44,8 +46,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import jokeapp.composeapp.generated.resources.Res
+import jokeapp.composeapp.generated.resources.dark_share
 import jokeapp.composeapp.generated.resources.download
-import jokeapp.composeapp.generated.resources.share
+import jokeapp.composeapp.generated.resources.light_share
+import jokeapp.composeapp.generated.resources.moon
+import jokeapp.composeapp.generated.resources.sun
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import ui.darkColorPalette
@@ -70,10 +75,11 @@ fun MainScreen(
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
+            TopAppBar(
                 title = {
                     Text(
-                        "Joke App", style = TextStyle(
+                        modifier = Modifier.padding(start = 10.dp),
+                        text = "Joke App", style = TextStyle(
                             fontFamily = robotoFontFamily,
                             fontSize = 25.sp,
                             fontWeight = FontWeight.Bold,
@@ -81,7 +87,24 @@ fun MainScreen(
                         )
                     )
                 },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                actions = {
+                    Image(
+                        modifier = Modifier
+                            .padding(end = 10.dp)
+                            .clickable {
+                                colorSchemeViewModel.toggleColorScheme()
+                            },
+                        painter = painterResource(
+                            if (colors == lightColorPalette) {
+                                Res.drawable.sun
+                            } else {
+                                Res.drawable.moon
+                            }
+                        ),
+                        contentDescription = "Change Theme"
+                    )
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = colors.background
                 )
             )
@@ -131,7 +154,7 @@ fun MainScreen(
                     elevation = CardDefaults.elevatedCardElevation(
 
                     )
-                ){}
+                ) {}
 
                 Card(
                     modifier = Modifier
@@ -152,7 +175,7 @@ fun MainScreen(
                     elevation = CardDefaults.elevatedCardElevation(
 
                     )
-                ){}
+                ) {}
 
                 Card(
                     modifier = Modifier
@@ -172,39 +195,29 @@ fun MainScreen(
 
                     )
                 ) {
-
-                    Box(
-                        modifier = Modifier
-                            .size(50.dp)
-                            .padding(
-                                end = 10.dp,
-                                top = 10.dp
-                            ) // Adjust padding to position the circle at the top end
-                            .align(Alignment.End), // Align the Box to the top end of the Card
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .size(40.dp)
-                                .background(
-                                    colors.onBackground,
-                                    shape = CircleShape
-                                )
-                                .clickable {
-                                    colorSchemeViewModel.toggleColorScheme()
-                                }, // Use CircleShape
-                            contentAlignment = Alignment.Center
-                        ) {
-                            // Circle content
-                        }
-                    }
+//                        Box(
+//                            modifier = Modifier.fillMaxHeight()
+//                                .align(Alignment.End),
+//                            contentAlignment = Alignment.BottomEnd
+//                        ) {
+//                            Image(
+//                                painterResource(
+//                                    if (colors == lightColorPalette) {
+//                                        Res.drawable.light_share
+//                                    } else {
+//                                        Res.drawable.dark_share
+//                                    }
+//                                ),
+//                                contentDescription = "Share"
+//                            )
+//                        }
 
                     Column(
                         modifier = Modifier
-                            .padding(20.dp)
-                            .padding(bottom = 20.dp),
+                            .fillMaxSize()
+                            .padding(20.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.SpaceEvenly
+                        verticalArrangement = Arrangement.Center
                     )
                     {
                         Text(
@@ -227,18 +240,22 @@ fun MainScreen(
                         )
 
 
+
                     }
+
 
 
                 }
 
+
             }
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {
                 Image(
-                    painter = painterResource(Res.drawable.share),
+                    painter = painterResource(Res.drawable.light_share),
                     contentDescription = "Share"
                 )
                 Image(
