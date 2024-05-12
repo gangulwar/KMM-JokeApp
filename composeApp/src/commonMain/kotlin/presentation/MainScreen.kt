@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Colors
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -48,11 +49,17 @@ import androidx.compose.ui.zIndex
 import jokeapp.composeapp.generated.resources.Res
 import jokeapp.composeapp.generated.resources.dark_share
 import jokeapp.composeapp.generated.resources.download
+import jokeapp.composeapp.generated.resources.light_left_arrow
+import jokeapp.composeapp.generated.resources.light_right_arrow
 import jokeapp.composeapp.generated.resources.light_share
 import jokeapp.composeapp.generated.resources.moon
 import jokeapp.composeapp.generated.resources.sun
+import model.Joke
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import presentation.jokecards.FirstJokeCard
+import presentation.jokecards.SecondJokeCard
+import presentation.jokecards.ThirdJokeCard
 import ui.darkColorPalette
 import ui.lightColorPalette
 import utils.robotoFontFamily
@@ -72,6 +79,8 @@ fun MainScreen(
         ColorScheme.Light -> lightColorPalette
         ColorScheme.Dark -> darkColorPalette
     }
+
+    val jokeList = jokeViewModel.jokes.collectAsState().value
 
     Scaffold(
         topBar = {
@@ -132,139 +141,67 @@ fun MainScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(23.dp),
-                contentAlignment = Alignment.Center // Align content to the bottom
+                contentAlignment = Alignment.Center
             ) {
 
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth(0.75f)
-                        .height(300.dp)
-                        .offset(y = 30.dp)
-//                        .padding(25.dp)
-                        .shadow(
-                            elevation = 10.dp,
-                            shape = RoundedCornerShape(23.dp),
-                            ambientColor = colors.onSurface,
-                            spotColor = colors.onSurface
-                        ),
-                    shape = RoundedCornerShape(23.dp),
-                    colors = CardDefaults.elevatedCardColors(
-                        containerColor = colors.surface
-                    ),
-                    elevation = CardDefaults.elevatedCardElevation(
+                if (jokeList.isNotEmpty()) {
 
-                    )
-                ) {}
-
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth(0.85f)
-                        .height(300.dp)
-                        .offset(y = 15.dp)
-//                        .padding(15.dp)
-                        .shadow(
-                            elevation = 10.dp,
-                            shape = RoundedCornerShape(23.dp),
-                            ambientColor = colors.onSurface,
-                            spotColor = colors.onSurface
-                        ),
-                    shape = RoundedCornerShape(23.dp),
-                    colors = CardDefaults.elevatedCardColors(
-                        containerColor = colors.surface
-                    ),
-                    elevation = CardDefaults.elevatedCardElevation(
-
-                    )
-                ) {}
-
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(300.dp)
-                        .shadow(
-                            elevation = 10.dp,
-                            shape = RoundedCornerShape(23.dp),
-                            ambientColor = colors.onSurface,
-                            spotColor = colors.onSurface
-                        ),
-                    shape = RoundedCornerShape(23.dp),
-                    colors = CardDefaults.elevatedCardColors(
-                        containerColor = colors.surface
-                    ),
-                    elevation = CardDefaults.elevatedCardElevation(
-
-                    )
-                ) {
-//                        Box(
-//                            modifier = Modifier.fillMaxHeight()
-//                                .align(Alignment.End),
-//                            contentAlignment = Alignment.BottomEnd
-//                        ) {
-//                            Image(
-//                                painterResource(
-//                                    if (colors == lightColorPalette) {
-//                                        Res.drawable.light_share
-//                                    } else {
-//                                        Res.drawable.dark_share
-//                                    }
-//                                ),
-//                                contentDescription = "Share"
-//                            )
-//                        }
-
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(20.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
-                    )
-                    {
-                        Text(
-                            "Jokes about anti-vaxxer parents never get old.", style = TextStyle(
-                                fontFamily = robotoFontFamily,
-                                fontSize = 25.sp,
-                                fontWeight = FontWeight.SemiBold,
-                                textAlign = TextAlign.Center,
-                                color = colors.onBackground
-                            )
+                    repeat(3) { cardNumber ->
+                        JokeCard(
+                            colors =
+                            colors,
+                            joke = jokeList[cardNumber],
+                            cardNumber = 3 - cardNumber
                         )
-                        Text(
-                            "Just like their kids.", style = TextStyle(
-                                fontFamily = robotoFontFamily,
-                                fontSize = 25.sp,
-                                fontWeight = FontWeight.SemiBold,
-                                textAlign = TextAlign.Center,
-                                color = colors.onBackground
-                            )
-                        )
-
-
 
                     }
+//                    ThirdJokeCard(
+//                        colors = colors,
+//                        joke = jokeList[2]
+//                    )
+//
+//                    SecondJokeCard(
+//                        colors = colors,
+//                        joke = jokeList[1]
+//                    )
+//
+//                    FirstJokeCard(
+//                        colors = colors,
+//                        joke = jokeList[0]
+//                    )
 
-
-
+                } else {
+                    CircularProgressIndicator()
                 }
 
 
             }
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().padding(23.dp),
                 horizontalArrangement = Arrangement.Center
             ) {
+
                 Image(
-                    painter = painterResource(Res.drawable.light_share),
-                    contentDescription = "Share"
+                    modifier = Modifier
+                        .padding(10.dp)
+                    ,
+                    painter = painterResource(Res.drawable.light_left_arrow),
+                    contentDescription = "Left Arrow"
                 )
+
+
                 Image(
-                    painter = painterResource(Res.drawable.download),
-                    contentDescription = "Share"
+                    modifier = Modifier
+                        .padding(10.dp)
+                        ,
+                    painter = painterResource(Res.drawable.light_right_arrow),
+                    contentDescription = "Right Arrow"
                 )
             }
-
         }
     }
 
 }
+
+
