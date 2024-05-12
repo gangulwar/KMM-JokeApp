@@ -62,6 +62,7 @@ import presentation.jokecards.SecondJokeCard
 import presentation.jokecards.ThirdJokeCard
 import ui.darkColorPalette
 import ui.lightColorPalette
+import utils.getCategoryEmoji
 import utils.robotoFontFamily
 import viewmodel.ColorScheme
 import viewmodel.ColorSchemeViewModel
@@ -128,14 +129,16 @@ fun MainScreen(
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
 
-            Text(
-                "Dark", style = TextStyle(
-                    fontFamily = robotoFontFamily,
-                    fontSize = 25.sp,
-                    fontWeight = FontWeight.Normal,
-                    color = colors.onBackground
+                Text(
+                    text = jokeViewModel.currentCategoryEmoji.value,
+                    style = TextStyle(
+                        fontFamily = robotoFontFamily,
+                        fontSize = 25.sp,
+                        fontWeight = FontWeight.Normal,
+                        color = colors.onBackground
+                    )
                 )
-            )
+
 
             Box(
                 modifier = Modifier

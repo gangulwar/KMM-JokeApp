@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import model.Joke
 import repository.JokeRepository
+import utils.getCategoryEmoji
 
 class JokeViewModel : ViewModel() {
 
@@ -20,6 +21,8 @@ class JokeViewModel : ViewModel() {
     private val jokeRepository = JokeRepository()
 
     val currentIndexs = mutableStateOf(CardIndexes())
+
+    val currentCategoryEmoji = MutableStateFlow("Loading...")
 
     init {
         viewModelScope.launch(Dispatchers.Main) {
@@ -34,6 +37,8 @@ class JokeViewModel : ViewModel() {
                     it + joke
                 }
             }
+
+            updateEmoji()
         }
     }
 
@@ -44,6 +49,8 @@ class JokeViewModel : ViewModel() {
             thirdCardIndex = currentIndexs.value.thirdCardIndex + 1
 
         )
+
+        updateEmoji()
 
         if (currentIndexs.value.thirdCardIndex % 5 == 0) {
             viewModelScope.launch {
@@ -62,6 +69,14 @@ class JokeViewModel : ViewModel() {
             )
         }
 
+       updateEmoji()
+
+    }
+
+    fun updateEmoji(){
+        currentCategoryEmoji.value = getCategoryEmoji(
+            _jokes.value[currentIndexs.value.firstCardIndex].category
+        )
     }
 }
 
