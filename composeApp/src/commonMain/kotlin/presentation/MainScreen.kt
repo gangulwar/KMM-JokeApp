@@ -147,12 +147,32 @@ fun MainScreen(
                 if (jokeList.isNotEmpty()) {
 
                     repeat(3) { cardNumber ->
-                        JokeCard(
-                            colors =
-                            colors,
-                            joke = jokeList[cardNumber],
-                            cardNumber = 3 - cardNumber
-                        )
+                        when(cardNumber){
+                            0-> JokeCard(
+                                colors =
+                                colors,
+                                joke = jokeList[jokeViewModel.currentIndexs.value.thirdCardIndex],
+                                cardNumber = 3 - cardNumber
+                            )
+
+                            1->
+                                JokeCard(
+                                    colors =
+                                    colors,
+                                    joke = jokeList[jokeViewModel.currentIndexs.value.secondCardIndex],
+                                    cardNumber = 3 - cardNumber
+                                )
+
+                            2->
+
+                                JokeCard(
+                                    colors =
+                                    colors,
+                                    joke = jokeList[jokeViewModel.currentIndexs.value.firstCardIndex],
+                                    cardNumber = 3 - cardNumber
+                                )
+
+                        }
 
                     }
 //                    ThirdJokeCard(
@@ -185,6 +205,9 @@ fun MainScreen(
                 Image(
                     modifier = Modifier
                         .padding(10.dp)
+                        .clickable {
+                                   jokeViewModel.previousIndexes()
+                        }
                     ,
                     painter = painterResource(Res.drawable.light_left_arrow),
                     contentDescription = "Left Arrow"
@@ -194,6 +217,9 @@ fun MainScreen(
                 Image(
                     modifier = Modifier
                         .padding(10.dp)
+                        .clickable {
+                            jokeViewModel.nextIndexes()
+                        }
                         ,
                     painter = painterResource(Res.drawable.light_right_arrow),
                     contentDescription = "Right Arrow"
