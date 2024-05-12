@@ -20,6 +20,7 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.Resource
 import org.jetbrains.compose.resources.painterResource
 import presentation.MainScreen
+import presentation.TinderLikeSwipe
 import ui.darkColorPalette
 import ui.lightColorPalette
 import utils.robotoFontFamily
@@ -33,8 +34,6 @@ import viewmodel.JokeViewModel
 fun App() {
     val colorSchemeViewModel = ColorSchemeViewModel()
     val jokeViewModel = JokeViewModel()
-
-
 
     MaterialTheme {
         MainScreen(

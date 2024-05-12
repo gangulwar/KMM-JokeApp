@@ -67,6 +67,6 @@ class JokeViewModel : ViewModel() {
 
 data class CardIndexes(
     var firstCardIndex: Int = 0,
-    var secondCardIndex: Int = 0,
-    var thirdCardIndex: Int = 0,
+    var secondCardIndex: Int = 1,
+    var thirdCardIndex: Int = 2,
 )
