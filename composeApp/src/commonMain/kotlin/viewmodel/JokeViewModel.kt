@@ -69,14 +69,19 @@ class JokeViewModel : ViewModel() {
             )
         }
 
-       updateEmoji()
+        updateEmoji()
 
     }
 
-    fun updateEmoji(){
-        currentCategoryEmoji.value = getCategoryEmoji(
-            _jokes.value[currentIndexs.value.firstCardIndex].category
-        )
+    fun updateEmoji() {
+        try {
+            currentCategoryEmoji.value = getCategoryEmoji(
+                _jokes.value[currentIndexs.value.firstCardIndex].category
+            )
+        } catch (e: IndexOutOfBoundsException) {
+            currentCategoryEmoji.value = "⏳"
+        }
+
     }
 }
 

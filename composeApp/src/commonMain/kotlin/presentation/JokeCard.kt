@@ -19,6 +19,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import model.Joke
@@ -83,7 +84,7 @@ fun JokeCard(
                     joke.setup.toString(),
                     style = TextStyle(
                         fontFamily = robotoFontFamily,
-                        fontSize = 25.sp,
+                        fontSize = processMessage(joke.setup.toString()),
                         fontWeight = FontWeight.Normal,
                         textAlign = TextAlign.Center,
                         color = colors.onBackground
@@ -94,7 +95,7 @@ fun JokeCard(
                     text =
                     joke.delivery.toString(), style = TextStyle(
                         fontFamily = robotoFontFamily,
-                        fontSize = 25.sp,
+                        fontSize = processMessage(joke.delivery.toString()),
                         fontWeight = FontWeight.SemiBold,
                         textAlign = TextAlign.Center,
                         color = colors.onBackground
@@ -105,7 +106,7 @@ fun JokeCard(
                     text =
                     joke.content.toString(), style = TextStyle(
                         fontFamily = robotoFontFamily,
-                        fontSize = 25.sp,
+                        fontSize = processMessage(joke.content.toString()),
                         fontWeight = FontWeight.SemiBold,
                         textAlign = TextAlign.Center,
                         color = colors.onBackground
@@ -116,4 +117,16 @@ fun JokeCard(
         }
     }
 
+}
+
+
+fun processMessage(message: String): TextUnit {
+
+    println("---")
+    println("$message ${message.length}")
+    return if (message.length >= 50) {
+        15.sp
+    } else {
+        20.sp
+    }
 }
