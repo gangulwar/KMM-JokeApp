@@ -55,7 +55,7 @@ fun JokeCard(
 
             )
             .shadow(
-                elevation = 5.dp,
+                elevation = 3.dp,
                 shape = RoundedCornerShape(23.dp),
                 ambientColor = colors.onSurface,
                 spotColor = colors.onSurface

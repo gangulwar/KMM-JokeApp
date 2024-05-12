@@ -26,7 +26,7 @@ val darkColorPalette = darkColors(
 
     background = Color(42, 46, 51),
     onBackground = Color.White,
-    surface = Color.Black,
+    surface = Color(34,39,44),
     onSurface = Color(118,118,118)
 
 )

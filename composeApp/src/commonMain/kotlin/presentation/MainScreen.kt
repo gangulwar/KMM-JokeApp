@@ -106,7 +106,7 @@ fun MainScreen(
         ) {
 
             Text(
-                text = jokeViewModel.currentCategoryEmoji.value,
+                text = jokeViewModel.currentCategoryEmoji.collectAsState().value,
                 style = TextStyle(
                     fontFamily = robotoFontFamily,
                     fontSize = 25.sp,
