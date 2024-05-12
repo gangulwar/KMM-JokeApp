@@ -55,7 +55,7 @@ fun JokeCard(
 
             )
             .shadow(
-                elevation = 10.dp,
+                elevation = 5.dp,
                 shape = RoundedCornerShape(23.dp),
                 ambientColor = colors.onSurface,
                 spotColor = colors.onSurface
@@ -84,7 +84,7 @@ fun JokeCard(
                     style = TextStyle(
                         fontFamily = robotoFontFamily,
                         fontSize = 25.sp,
-                        fontWeight = FontWeight.SemiBold,
+                        fontWeight = FontWeight.Normal,
                         textAlign = TextAlign.Center,
                         color = colors.onBackground
                     )
