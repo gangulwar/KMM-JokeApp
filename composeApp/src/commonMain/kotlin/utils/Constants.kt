@@ -5,7 +5,7 @@ object Constants {
 }
 
 fun getCategoryEmoji(category: String): String {
-    println("getCategoryEmoji() called with $category")
+//    println("getCategoryEmoji() called with $category")
     return when (category) {
         "Programming" -> "👨‍💻"
         "Misc" -> "🤪"

@@ -122,8 +122,8 @@ fun JokeCard(
 
 fun processMessage(message: String): TextUnit {
 
-    println("---")
-    println("$message ${message.length}")
+//    println("---")
+//    println("$message ${message.length}")
     return if (message.length >= 50) {
         15.sp
     } else {
